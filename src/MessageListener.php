@@ -42,6 +42,10 @@ class MessageListener implements EventSubscriberInterface
             return;
         }
 
+        if ($message->getHeaders()->has('From')) {
+            return;
+        }
+
         $message->getHeaders()->add(new MailboxListHeader('From', Address::createArray([$this->sender])));
     }
 }
